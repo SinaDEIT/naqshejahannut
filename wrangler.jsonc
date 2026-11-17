@@ -1,0 +1,21 @@
+{
+  // نام باید دقیقاً با نام Worker در داشبورد کلادفلر یکی باشد
+  "name": "naghshe-jahan-shop",
+  "main": "worker.js",
+  "compatibility_date": "2026-06-01",
+  "assets": {
+    "directory": "./public",
+    "binding": "ASSETS",
+    // فقط این مسیرها Worker را اجرا می‌کنند؛ بقیه‌ی سایت فایل ثابت و رایگان است
+    "run_worker_first": ["/api/*", "/products.json", "/reviews.json"]
+  },
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "njk-shop",
+      // کد شناسه‌ی دیتابیس را از داشبورد (Storage & Databases > D1 > njk-shop > Database ID) اینجا بگذارید
+      "database_id": "PUT-YOUR-DATABASE-ID-HERE"
+    }
+  ],
+  "observability": { "enabled": true }
+}

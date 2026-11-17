@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>پیگیری سفارش | خشکبار نقش جهان</title>
+<meta name="description" content="پیگیری وضعیت سفارش خشکبار نقش جهان با کد سفارش و شماره موبایل.">
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#1C3B2B">
+<link rel="canonical" href="https://naqshejahannut.ir/track.html">
+<link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+<link rel="preload" href="assets/fonts/vazirmatn-subset.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="assets/css/loader.css">
+  <script src="assets/js/loader.js"></script>
+  <link rel="stylesheet" href="assets/css/style.css">
+<link rel="stylesheet" href="assets/css/doc.css">
+</head>
+<body>
+<header class="doc-bar"><div class="container">
+<a href="index.html" aria-label="خشکبار نقش جهان"><img src="assets/img/logo.webp" width="320" height="270" alt="لوگوی خشکبار نقش جهان"></a>
+<a class="back" href="index.html">بازگشت به فروشگاه</a>
+</div></header>
+<main class="doc trk">
+<header class="trk__head">
+<h1>پیگیری سفارش</h1>
+<p>کد سفارش و شماره موبایلی را که هنگام ثبت سفارش وارد کرده‌اید بنویسید.</p>
+</header>
+<form id="tf" class="trk__form" novalidate>
+<label>کد سفارش<input id="tc" dir="ltr" placeholder="NJ-123456" maxlength="12" autocomplete="off" autocapitalize="characters"></label>
+<label>شماره موبایل<input id="tp" dir="ltr" inputmode="numeric" placeholder="09xxxxxxxxx" maxlength="11" autocomplete="tel"></label>
+<button class="btn btn--primary" type="submit">نمایش وضعیت</button>
+</form>
+<p class="trk__err" id="te" role="alert" hidden></p>
+<section id="tr" class="trk__res" hidden aria-live="polite">
+<div class="trk__top"><div><span class="trk__lbl">کد سفارش</span><b id="tcode" dir="ltr"></b></div><span class="trk__badge" id="tbadge"></span></div>
+<ol class="trk__steps" id="ts"></ol>
+<ul class="trk__items" id="ti"></ul>
+<dl class="trk__sum"><div><dt>هزینهٔ ارسال</dt><dd id="tship"></dd></div><div class="tot"><dt>جمع کل</dt><dd id="ttot"></dd></div></dl>
+<p class="trk__date" id="tm"></p>
+</section>
+<p class="note">برای هر سؤالی درباره‌ی سفارش، از بخش <a href="contact.html">تماس با ما</a> با فروشگاه در ارتباط باشید.</p>
+</main>
+<style>
+.trk{max-width:620px}
+.trk__head{text-align:center;margin-bottom:22px}
+.trk__head p{color:var(--muted)}
+.trk__form{display:grid;gap:14px;background:var(--cream);border-radius:var(--radius-lg,22px);padding:22px;box-shadow:6px 6px 14px rgba(var(--shadow-warm,200,185,150),.45),-6px -6px 14px rgba(var(--shadow-light,255,255,255),1)}
+.trk__form label{display:grid;gap:6px;font-weight:700;color:var(--green);font-size:.92rem}
+.trk__form input{border:1px solid var(--line);border-radius:14px;padding:0 16px;min-height:50px;background:#fff;font:inherit;font-size:1rem;width:100%;min-width:0;text-align:left}
+.trk__form input:focus{outline:2px solid var(--gold);outline-offset:1px}
+.trk__form .btn{width:100%;min-height:50px}
+.trk__err{color:#a33;font-weight:700;text-align:center;margin-top:14px}
+.trk__res{margin:22px 0;background:var(--cream-deep);border-radius:var(--radius-lg,22px);padding:20px 22px;border:1px solid var(--line)}
+.trk__top{display:flex;flex-wrap:wrap;gap:10px 16px;align-items:center;justify-content:space-between;padding-bottom:14px;border-bottom:1px dashed rgba(var(--green-rgb,28,59,43),.25)}
+.trk__lbl{display:block;font-size:.78rem;color:var(--muted)}
+.trk__top b{font-size:1.25rem;color:var(--green)}
+.trk__badge{padding:2px 14px;border-radius:30px;background:var(--gold);color:var(--green);font-weight:800;font-size:.85rem}
+.trk__badge.ok{background:var(--green);color:var(--gold)}
+.trk__badge.bad{background:#a33;color:#fff}
+.trk__steps{list-style:none;margin:18px 0;padding:0;display:grid}
+.trk__steps li{position:relative;padding:0 34px 18px 0;color:var(--muted);line-height:1.6}
+.trk__steps li:last-child{padding-bottom:0}
+.trk__steps li::before{content:"";position:absolute;inset-inline-start:0;top:3px;width:18px;height:18px;border-radius:50%;border:2px solid #cdbf9f;background:var(--cream-deep);z-index:1}
+.trk__steps li::after{content:"";position:absolute;inset-inline-start:8px;top:22px;bottom:-3px;width:2px;background:#d9ccaa}
+.trk__steps li:last-child::after{display:none}
+.trk__steps li.done{color:var(--green);font-weight:700}
+.trk__steps li.done::before{background:var(--gold);border-color:var(--gold)}
+.trk__steps li.done::after{background:var(--gold)}
+.trk__steps li.cur{color:var(--green);font-weight:800}
+.trk__steps li.cur::before{background:var(--green);border-color:var(--green);box-shadow:0 0 0 4px rgba(var(--green-rgb,28,59,43),.15)}
+.trk__steps li.bad{color:#a33;font-weight:800}
+.trk__steps li.bad::before{background:#a33;border-color:#a33}
+.trk__items{list-style:none;margin:0;padding:0;border-top:1px dashed rgba(var(--green-rgb,28,59,43),.25)}
+.trk__items li{display:flex;justify-content:space-between;gap:12px;margin:0;padding:10px 0;border-bottom:1px dashed rgba(var(--green-rgb,28,59,43),.25)}
+.trk__items li span:first-child{overflow-wrap:anywhere}
+.trk__items li span:last-child{white-space:nowrap;color:var(--muted)}
+.trk__sum{margin:12px 0 0;display:grid;gap:6px}
+.trk__sum div{display:flex;justify-content:space-between;gap:12px}
+.trk__sum dt{color:var(--muted)}
+.trk__sum dd{margin:0;font-weight:700}
+.trk__sum .tot{font-size:1.1rem;padding-top:8px;border-top:1px solid rgba(var(--green-rgb,28,59,43),.2)}
+.trk__sum .tot dt{color:var(--green);font-weight:800}
+.trk__date{margin:12px 0 0;font-size:.82rem;color:var(--muted)}
+@media(min-width:640px){.trk__form{grid-template-columns:1fr 1fr;align-items:end}.trk__form .btn{grid-column:1/-1}}
+@media(max-width:420px){.trk__form,.trk__res{padding:18px 16px}}
+</style>
+<script>
+(function(){
+var $=function(i){return document.getElementById(i)},ST=["new","confirmed","shipped","delivered"],
+LB={new:"ثبت شد؛ در انتظار تأیید فروشگاه",confirmed:"تأیید شد",shipped:"ارسال شد",delivered:"تحویل داده شد",canceled:"لغو شد"},
+SH={new:"ثبت‌شده",confirmed:"تأییدشده",shipped:"ارسال‌شده",delivered:"تحویل‌شده",canceled:"لغو‌شده"},
+W={250:"۲۵۰ گرم",500:"۵۰۰ گرم",750:"۷۵۰ گرم",1000:"۱ کیلوگرم"},
+fa=function(n){return Number(n).toLocaleString("fa-IR")};
+function ls(k){try{return JSON.parse(localStorage.getItem(k))||{}}catch(e){return{}}}
+var q=new URLSearchParams(location.search),last=ls("njk_last_order"),ship=ls("njk_ship");
+$("tc").value=q.get("c")||last.code||"";$("tp").value=last.phone||ship.phone||"";
+function err(m){$("te").textContent=m;$("te").hidden=!m}
+function li(txt,cls){var l=document.createElement("li");l.textContent=txt;if(cls)l.className=cls;return l}
+function show(o){
+  $("tcode").textContent=o.code;
+  var bd=$("tbadge");bd.textContent=SH[o.status]||o.status;bd.className="trk__badge"+(o.status==="delivered"?" ok":o.status==="canceled"?" bad":"");
+  var i=ST.indexOf(o.status),s=$("ts");s.innerHTML="";
+  if(o.status==="canceled")s.appendChild(li("این سفارش لغو شده است. برای اطلاعات بیشتر با فروشگاه تماس بگیرید.","bad"));
+  else ST.forEach(function(k,n){s.appendChild(li(LB[k],n<i?"done":n===i?"cur":""))});
+  var it=$("ti");it.innerHTML="";
+  o.items.forEach(function(x){var l=document.createElement("li"),a=document.createElement("span"),b=document.createElement("span");a.textContent=x.name+" — "+(W[x.g]||x.g);b.textContent="× "+fa(x.q);l.appendChild(a);l.appendChild(b);it.appendChild(l)});
+  $("tship").textContent=o.shipping?fa(o.shipping)+" تومان":"رایگان";
+  $("ttot").textContent=fa(o.total)+" تومان";
+  $("tm").textContent=o.date?"تاریخ ثبت: "+o.date:"";
+  $("tr").hidden=false;
+  try{$("tr").scrollIntoView({behavior:"smooth",block:"start"})}catch(e){}
+}
+$("tf").addEventListener("submit",function(e){
+  e.preventDefault();err("");$("tr").hidden=true;
+  var b=$("tf").querySelector("button");b.disabled=true;
+  fetch(window.njkApiUrl("api/track"),{method:"POST",headers:{"content-type":"application/json"},body:JSON.stringify({code:$("tc").value,phone:$("tp").value})})
+  .then(function(r){return r.json().catch(function(){return{}})})
+  .then(function(j){b.disabled=false;if(j&&j.ok)show(j.order);else err((j&&j.error)||"ارتباط با سرور برقرار نشد. کمی بعد دوباره امتحان کنید.")})
+  .catch(function(){b.disabled=false;err("ارتباط با سرور برقرار نشد.")});
+});
+if($("tc").value&&$("tp").value&&q.get("c"))$("tf").requestSubmit();
+})();
+</script>
+<footer class="doc-foot"><div class="container">
+<a href="index.html#faq">سوالات متداول</a><a href="terms.html">قوانین و مقررات</a><a href="privacy.html">حریم خصوصی</a><a href="track.html" aria-current="page">پیگیری سفارش</a><a href="contact.html">تماس با ما</a><a href="about.html">درباره ما</a>
+</div></footer>
+</body>
+</html>

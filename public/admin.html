@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<meta name="theme-color" content="#1C3B2B">
+<title>پنل مدیریت | خشکبار نقش جهان</title>
+<link rel="preload" href="assets/fonts/vazirmatn-subset.woff2" as="font" type="font/woff2" crossorigin>
+<style>
+@font-face{font-family:"Vazirmatn";src:url(assets/fonts/vazirmatn-subset.woff2) format("woff2");font-weight:400 900;font-display:swap}
+:root{--green:#1C3B2B;--green-soft:#2E5741;--gold:#D4AF37;--cream:#FAF6F0;--cream-deep:#F1E9DA;--ink:#2b2b2b;--muted:#6b6b6b;--red:#a33;--line:#e3d8bf}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;font-family:"Vazirmatn","Segoe UI",Tahoma,sans-serif;font-size:16px;background:var(--cream-deep);color:var(--ink);line-height:1.75}
+header{background:var(--green);color:#fff;padding:12px 16px;display:flex;align-items:center;justify-content:space-between;gap:12px}
+header h1{margin:0;font-size:1.05rem;color:var(--gold)}
+main{max-width:1040px;margin:0 auto;padding:0 14px 60px}
+button,input,select{font:inherit;color:inherit}
+button{cursor:pointer;border:0;border-radius:12px;padding:0 16px;min-height:44px;background:var(--green);color:#fff;font-weight:700}
+button.ghost{background:transparent;color:var(--green);border:1.5px solid var(--green)}
+button.warn{background:var(--red)}
+button:disabled{opacity:.5;cursor:default}
+input,select{border:1px solid #cdbf9f;border-radius:10px;padding:0 12px;min-height:44px;background:#fff;min-width:0;width:100%;font-size:16px}
+:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
+.card{background:var(--cream);border-radius:16px;padding:16px;margin-bottom:12px;box-shadow:0 2px 8px rgba(0,0,0,.07)}
+.bar{position:sticky;top:0;z-index:10;background:var(--cream-deep);padding:12px 0 10px}
+.tabs{display:flex;gap:8px;overflow-x:auto;scrollbar-width:none}
+.tabs::-webkit-scrollbar{display:none}
+.tabs button{flex:none;background:#fff;color:var(--green);border:1px solid #cdbf9f}
+.tabs button.on{background:var(--green);color:var(--gold);border-color:var(--green)}
+@media(max-width:380px){.tabs{gap:4px}.tabs button{padding-inline:6px;font-size:.82rem}}
+.row{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+.grow{flex:1}
+.muted{color:var(--muted);font-size:.85rem}
+.pill{display:inline-block;padding:0 10px;border-radius:20px;background:var(--gold);color:var(--green);font-size:.78rem;font-weight:800;line-height:1.7}
+.ltr{direction:ltr;unicode-bidi:embed}
+.err{color:var(--red);min-height:1.5em;margin:6px 0}
+.ok{color:var(--green-soft);min-height:1.5em;margin:6px 0}
+.hidden,[hidden]{display:none!important}
+.login{max-width:380px;margin:48px auto}
+.tool{display:grid;gap:10px;grid-template-columns:1fr auto auto}
+.tool label{display:grid;gap:2px;font-size:.85rem;color:var(--muted)}
+
+/* سفارش‌ها */
+.order{border-inline-start:6px solid var(--gold)}
+.order.st-confirmed,.order.st-shipped{border-inline-start-color:var(--green-soft)}
+.order.st-delivered{border-inline-start-color:var(--green)}
+.order.st-canceled{border-inline-start-color:var(--red);opacity:.8}
+.o-head{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:6px 12px;margin-bottom:10px}
+.o-head b{font-size:1.1rem}
+.badge{padding:1px 12px;border-radius:20px;font-size:.82rem;font-weight:800;background:var(--gold);color:var(--green)}
+.st-confirmed .badge,.st-shipped .badge{background:var(--green-soft);color:#fff}
+.st-delivered .badge{background:var(--green);color:var(--gold)}
+.st-canceled .badge{background:var(--red);color:#fff}
+.o-body{display:grid;gap:14px}
+.o-who p{margin:0 0 6px;overflow-wrap:anywhere}
+.callbtn{display:inline-flex;align-items:center;min-height:40px;padding:0 14px;border-radius:12px;background:var(--green);color:var(--gold)!important;font-weight:700;text-decoration:none}
+.o-items{list-style:none;margin:0;padding:0;font-size:.95rem}
+.o-items li{display:flex;justify-content:space-between;gap:10px;padding:6px 0;border-bottom:1px dashed var(--line)}
+.o-items span:last-child{white-space:nowrap}
+.o-foot{display:grid;gap:10px;margin-top:12px;padding-top:12px;border-top:1px solid var(--line)}
+.o-foot label{display:grid;gap:2px;font-size:.85rem;color:var(--muted)}
+.o-act{grid-column:1/-1;display:flex;justify-content:flex-end}.o-act button{min-height:38px;font-size:.88rem}
+@media(min-width:720px){.o-body{grid-template-columns:1fr 1fr;gap:24px}.o-foot{grid-template-columns:1fr minmax(180px,240px);align-items:end}.tool{grid-template-columns:240px 150px 150px;justify-content:start}}
+
+/* نظرها */
+.rv-head{display:flex;flex-wrap:wrap;align-items:center;gap:6px 12px}
+.stars{color:var(--gold);letter-spacing:2px}
+.rv-body{margin:8px 0 12px;overflow-wrap:anywhere}
+.rv-act{display:flex;gap:10px}
+.rv-act button{flex:1}
+@media(min-width:720px){.rv-act button{flex:none}}
+
+/* محصولات */
+.prod{display:grid;grid-template-columns:1fr 1fr;gap:10px;align-items:end}
+.prod .p-name{grid-column:1/-1;display:flex;flex-wrap:wrap;align-items:center;gap:6px 10px}
+.prod label{display:grid;gap:2px;font-size:.82rem;color:var(--muted)}
+.prod .chk{grid-column:1/-1;display:flex;align-items:center;gap:10px;min-height:44px;font-size:.95rem;color:var(--ink)}
+.prod .chk input{width:22px;height:22px;min-height:0}
+.prod .p-act{grid-column:1/-1;display:flex;gap:10px}
+.prod .p-act button{flex:1}
+@media(min-width:900px){.prod{grid-template-columns:minmax(220px,1.6fr) 150px 150px 130px auto auto;padding:12px 16px}.prod .p-name{grid-column:auto;display:grid;gap:0}.prod .chk,.prod .p-act{grid-column:auto}.prod .p-act button{flex:none}.prod .chk{min-height:44px}}
+.hint{padding:12px 14px;background:#fff;border-radius:12px;font-size:.88rem;color:var(--muted);margin-bottom:12px}
+</style>
+</head>
+<body>
+<header><h1>پنل مدیریت نقش جهان</h1><button class="ghost" id="logout" hidden style="color:#fff;border-color:#fff">خروج</button></header>
+<main>
+  <section class="card login" id="login">
+    <h2 style="margin-top:0">ورود</h2>
+    <p class="muted">کلید مدیریت (مقدار ADMIN_KEY که در Secretهای Railway تنظیم کرده‌اید) را وارد کنید.</p>
+    <div style="display:grid;gap:10px"><input class="ltr" id="key" type="password" autocomplete="current-password" placeholder="کلید مدیریت"><button id="go">ورود</button></div>
+    <p class="err" id="login-err" role="alert"></p>
+  </section>
+
+  <div id="app" hidden>
+    <div class="bar">
+      <div class="tabs" role="tablist" aria-label="بخش‌های مدیریت">
+        <button id="admin-tab-orders" type="button" role="tab" aria-selected="true" aria-controls="tab-orders" tabindex="0" data-tab="orders" class="on">سفارش‌ها <span class="pill" id="new-count" hidden></span></button>
+        <button id="admin-tab-reviews" type="button" role="tab" aria-selected="false" aria-controls="tab-reviews" tabindex="-1" data-tab="reviews">نظرها</button>
+        <button id="admin-tab-products" type="button" role="tab" aria-selected="false" aria-controls="tab-products" tabindex="-1" data-tab="products">قیمت و موجودی</button>
+      </div>
+    </div>
+    <p id="msg" role="alert" class="err"></p>
+
+    <section id="tab-orders" role="tabpanel" aria-labelledby="admin-tab-orders" tabindex="0">
+      <div class="card tool">
+        <label>وضعیت سفارش<select id="st-filter"><option value="">همه</option><option value="new">جدید</option><option value="confirmed">تأییدشده</option><option value="shipped">ارسال‌شده</option><option value="delivered">تحویل‌شده</option><option value="canceled">لغو‌شده</option></select></label>
+        <button class="ghost" id="refresh-orders" style="align-self:end">به‌روزرسانی</button>
+        <button class="warn" id="del-all" style="align-self:end">حذف گروهی…</button>
+      </div>
+      <p class="muted" id="ord-note" hidden></p>
+      <div class="card row"><button class="ghost" id="tg-setup">فعال‌سازی دستورهای بات تلگرام</button> <button class="ghost" id="tg-status">بررسی وضعیت بات</button><span class="muted">یک‌بار بعد از ثبت TG_BOT_TOKEN و TG_CHAT_ID بزنید؛ اگر آدرس سایت عوض شد دوباره بزنید.</span></div>
+      <div id="orders"></div>
+    </section>
+
+    <section id="tab-reviews" role="tabpanel" aria-labelledby="admin-tab-reviews" tabindex="0" hidden>
+      <div class="card tool">
+        <label>نمایش<select id="rv-filter"><option value="0">در انتظار تأیید</option><option value="1">منتشرشده</option></select></label>
+        <button class="ghost" id="refresh-reviews" style="align-self:end">به‌روزرسانی</button>
+      </div>
+      <div id="reviews"></div>
+    </section>
+
+    <section id="tab-products" role="tabpanel" aria-labelledby="admin-tab-products" tabindex="0" hidden>
+      <p class="hint">قیمت‌ها <b>به تومان برای هر کیلوگرم</b> هستند (۵۰۰ و ۲۵۰ گرم خودکار محاسبه می‌شود). قیمت را خالی بگذارید تا «تماس بگیرید» نشان داده شود. تغییرها تا حدود ۱ تا ۲ دقیقه بعد در سایت دیده می‌شوند. افزودن محصول یا عکس جدید از طریق فایل‌های سایت است (README-ADMIN.md).</p>
+      <div class="card"><input id="p-search" type="search" placeholder="جستجوی محصول…" aria-label="جستجوی محصول"></div>
+      <div id="products"></div>
+    </section>
+  </div>
+</main>
+<script src="assets/js/loader.js"></script>
+<script>
+(() => {
+  const $ = (s, r = document) => r.querySelector(s), $$ = (s, r = document) => [...r.querySelectorAll(s)];
+  const esc = (s) => String(s == null ? "" : s).replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+  const fa = (n) => Number(n).toLocaleString("fa-IR");
+  const W = { 250: "۲۵۰ گرم", 500: "۵۰۰ گرم", 750: "۷۵۰ گرم", 1000: "۱ کیلوگرم" };
+  const ST = { new: "جدید", confirmed: "تأییدشده", shipped: "ارسال‌شده", delivered: "تحویل‌شده", canceled: "لغو‌شده" };
+  const when = (s) => { try { return new Date(String(s).replace(" ", "T") + "Z").toLocaleString("fa-IR", { dateStyle: "medium", timeStyle: "short" }); } catch (e) { return s; } };
+  let KEY = sessionStorage.getItem("njk_admin") || "";
+
+  async function api(path, body) {
+    const r = await fetch(window.njkApiUrl("api/admin/" + path), { method: body ? "POST" : "GET", headers: Object.assign({ authorization: "Bearer " + KEY }, body ? { "content-type": "application/json" } : {}), body: body ? JSON.stringify(body) : undefined });
+    const j = await r.json().catch(() => ({}));
+    if (!r.ok || !j.ok) { const e = new Error(j.error || "خطا در ارتباط با سرور"); e.status = r.status; throw e; }
+    return j;
+  }
+  const say = (m, good) => { const e = $("#msg"); e.textContent = m || ""; e.className = good ? "ok" : "err"; if (good) setTimeout(() => { if (e.textContent === m) e.textContent = ""; }, 2500); };
+  const fail = (e) => { if (e.status === 401) return logout(); say(e.message); };
+
+  async function enter() {
+    $("#login-err").textContent = "";
+    try { await api("orders"); sessionStorage.setItem("njk_admin", KEY); $("#login").hidden = true; $("#app").hidden = false; $("#logout").hidden = false; loadOrders(); }
+    catch (e) { KEY = ""; $("#login-err").textContent = e.message; }
+  }
+  function logout() { KEY = ""; sessionStorage.removeItem("njk_admin"); $("#app").hidden = true; $("#login").hidden = false; $("#logout").hidden = true; $("#key").value = ""; }
+  $("#go").onclick = () => { KEY = $("#key").value.trim(); if (KEY) enter(); };
+  $("#key").onkeydown = (e) => { if (e.key === "Enter") $("#go").click(); };
+  $("#logout").onclick = logout;
+
+  const tabs = $$(".tabs [role=tab]");
+  function activateTab(b) {
+    tabs.forEach(x => {
+      const selected = x === b;
+      x.classList.toggle("on", selected);
+      x.setAttribute("aria-selected", String(selected));
+      x.tabIndex = selected ? 0 : -1;
+      const panel = $("#" + x.getAttribute("aria-controls"));
+      panel.hidden = !selected;
+    });
+    ({ orders: loadOrders, reviews: loadReviews, products: loadProducts })[b.dataset.tab]();
+  }
+  tabs.forEach(b => {
+    b.onclick = () => activateTab(b);
+    b.onkeydown = e => {
+      const i = tabs.indexOf(b);
+      const next = e.key === "ArrowLeft" ? (i + 1) % tabs.length
+        : e.key === "ArrowRight" ? (i - 1 + tabs.length) % tabs.length
+        : e.key === "Home" ? 0
+        : e.key === "End" ? tabs.length - 1 : -1;
+      if (next < 0) return;
+      e.preventDefault();
+      tabs[next].focus();
+      activateTab(tabs[next]);
+    };
+  });
+
+  /* ---- سفارش‌ها ---- */
+  async function loadOrders() {
+    try {
+      const { orders, count } = await api("orders" + ($("#st-filter").value ? "?status=" + $("#st-filter").value : ""));
+      const n = orders.filter(o => o.status === "new").length;
+      $("#new-count").hidden = !n; $("#new-count").textContent = fa(n);
+      const note = $("#ord-note"); note.hidden = !(count > orders.length); note.textContent = `${fa(orders.length)} سفارش جدیدتر از ${fa(count)} سفارش نمایش داده شد؛ برای دیدن بقیه، سفارش‌های قدیمی را حذف یا از فیلتر وضعیت استفاده کنید.`;
+      $("#orders").innerHTML = orders.length ? orders.map(o => `
+        <article class="card order st-${esc(o.status)}">
+          <div class="o-head"><div><b class="ltr">${esc(o.code)}</b> <span class="muted" dir="rtl">${esc(when(o.created_at))}</span></div><span class="badge">${esc(ST[o.status] || o.status)}</span></div>
+          <div class="o-body">
+            <div class="o-who"><p><b>${esc(o.name)}</b></p><p>${esc(o.province)} ${esc(o.city)} — ${esc(o.address)}</p>${o.note ? `<p class="muted">توضیح مشتری: ${esc(o.note)}</p>` : ""}<a class="callbtn ltr" href="tel:${esc(o.phone)}">${esc(o.phone)}</a></div>
+            <ul class="o-items">${o.items.map(i => `<li><span>${esc(i.name)} — ${W[i.g] || i.g} × ${fa(i.q)}</span><span>${fa(i.unit * i.q)}</span></li>`).join("")}</ul>
+          </div>
+          <div class="o-foot"><div>ارسال: ${o.shipping ? fa(o.shipping) + " تومان" : "رایگان"}<br><b>جمع کل: ${fa(o.total)} تومان</b></div>
+            <label>تغییر وضعیت<select data-code="${esc(o.code)}">${Object.entries(ST).map(([k, v]) => `<option value="${k}"${k === o.status ? " selected" : ""}>${v}</option>`).join("")}</select></label>
+            <div class="o-act"><button class="warn" data-del="${esc(o.code)}">حذف این سفارش</button></div></div>
+        </article>`).join("") : '<p class="card muted">سفارشی وجود ندارد.</p>';
+      $$("#orders select").forEach(s => s.onchange = () => api("order-status", { code: s.dataset.code, status: s.value }).then(() => { say("وضعیت ذخیره شد.", 1); loadOrders(); }).catch(fail));
+      $$("#orders [data-del]").forEach(b => b.onclick = () => {
+        if (!confirm("سفارش " + b.dataset.del + " برای همیشه حذف شود؟ این کار قابل بازگشت نیست.")) return;
+        api("order-delete", { code: b.dataset.del }).then(() => { say("سفارش حذف شد.", 1); loadOrders(); }).catch(fail);
+      });
+    } catch (e) { fail(e); }
+  }
+  $("#refresh-orders").onclick = loadOrders; $("#st-filter").onchange = loadOrders;
+  $("#tg-setup").onclick = () => api("telegram-setup", {}).then(() => say("دستورهای بات فعال شد. در تلگرام /start را بفرستید.", 1)).catch(fail);
+  $("#tg-status").onclick = () => api("telegram-status", {}).then(r => {
+    const L = [];
+    if (!r.token) L.push("❌ TG_BOT_TOKEN در تنظیمات Railway ثبت نشده است.");
+    else if (!r.botOk) L.push("❌ تلگرام توکن را نپذیرفت؛ توکن اشتباه یا باطل‌شده است.");
+    else L.push("✅ بات متصل است: @" + r.bot + " (مطمئن شوید همین بات در گروه است)");
+    L.push(r.chats ? "✅ تعداد شناسه‌های ثبت‌شده در TG_CHAT_ID: " + r.chats : "⚠️ TG_CHAT_ID خالی است (مدیر و گروه شناخته نمی‌شوند).");
+    if (r.token && r.botOk) {
+      if (!r.webhook) L.push("❌ webhook ثبت نشده است؛ دکمهٔ «فعال‌سازی دستورهای بات» را بزنید.");
+      else if (r.webhook !== r.expected) L.push("⚠️ webhook روی آدرس دیگری ثبت شده است:\n" + r.webhook + "\nدکمهٔ «فعال‌سازی…» را از همین صفحه بزنید تا به " + r.expected + " عوض شود.");
+      else L.push("✅ webhook درست ثبت شده است.");
+      if (r.pending) L.push("⚠️ پیام‌های در انتظار: " + r.pending);
+      if (r.lastError) L.push("⚠️ آخرین خطای تلگرام در رساندن پیام به سایت:\n" + r.lastError + (r.lastErrorDate ? "\n(" + new Date(r.lastErrorDate * 1000).toLocaleString("fa-IR") + ")" : ""));
+    }
+    alert(L.join("\n\n"));
+  }).catch(fail);
+  $("#del-all").onclick = () => {
+    const st = $("#st-filter").value || "all", label = st === "all" ? "همه‌ی سفارش‌ها" : "همه‌ی سفارش‌های «" + ST[st] + "»";
+    const ans = prompt("می‌خواهید " + label + " را برای همیشه حذف کنید؟ این کار قابل بازگشت نیست.\nبرای تأیید، کلمه‌ی «حذف» را بنویسید:");
+    if (ans === null) return;
+    if (ans.trim() !== "حذف") return say("کلمه‌ی تأیید درست نوشته نشد؛ چیزی حذف نشد.");
+    api("orders-delete", { status: st, confirm: "DELETE" }).then(r => { say(fa(r.deleted) + " سفارش حذف شد.", 1); loadOrders(); }).catch(fail);
+  };
+
+  /* ---- نظرها ---- */
+  async function loadReviews() {
+    try {
+      const pend = $("#rv-filter").value === "0";
+      const { reviews } = await api("reviews?approved=" + $("#rv-filter").value);
+      $("#reviews").innerHTML = reviews.length ? reviews.map(r => `
+        <article class="card"><div class="rv-head"><b>${esc(r.name || "بدون نام")}</b><span class="stars" aria-label="${r.rating} از ۵">${"★".repeat(r.rating)}${"☆".repeat(5 - r.rating)}</span><span class="muted">${esc(when(r.created_at))}${r.pid ? " — محصول " + esc(r.pid) : ""}</span></div>
+          <p class="rv-body">${esc(r.body)}</p><div class="rv-act">${pend ? `<button data-a="approve" data-id="${r.id}">تأیید و انتشار</button>` : ""}<button class="warn" data-a="delete" data-id="${r.id}">حذف</button></div></article>`).join("") : '<p class="card muted">موردی نیست.</p>';
+      $$("#reviews button").forEach(b => b.onclick = () => (b.dataset.a === "delete" && !confirm("این نظر حذف شود؟") ? 0 : api("review", { id: +b.dataset.id, action: b.dataset.a }).then(() => { say("انجام شد.", 1); loadReviews(); }).catch(fail)));
+    } catch (e) { fail(e); }
+  }
+  $("#refresh-reviews").onclick = loadReviews; $("#rv-filter").onchange = loadReviews;
+
+  /* ---- قیمت و موجودی ---- */
+  async function loadProducts() {
+    try {
+      const { products } = await api("products");
+      $("#products").innerHTML = products.map(p => `
+        <article class="card prod" data-id="${esc(p.id)}" data-name="${esc(p.name)}">
+          <div class="p-name"><b>${esc(p.name)}</b>${p.changed ? ' <span class="pill">تغییر یافته</span>' : ""}${p.changed ? `<span class="muted">در فایل سایت: ${p.base.price == null ? "تماس بگیرید" : fa(p.base.price)}</span>` : ""}</div>
+          <label>قیمت (تومان/کیلو)<input class="ltr" inputmode="numeric" data-f="price" value="${p.price == null ? "" : p.price}" placeholder="تماس بگیرید"></label>
+          <label>قیمت قبلی<input class="ltr" inputmode="numeric" data-f="old" value="${p.old || ""}"></label>
+          <label>نشان<select data-f="badge">${[["", "بدون نشان"], ["sale", "تخفیف"], ["best", "پرفروش"], ["new", "ویژه"]].map(([v, l]) => `<option value="${v}"${v === p.badge ? " selected" : ""}>${l}</option>`).join("")}</select></label>
+          <label class="chk"><input type="checkbox" data-f="hidden"${p.hidden ? " checked" : ""}>مخفی از سایت</label>
+          <div class="p-act"><button data-s="save">ذخیره</button>${p.changed ? '<button class="ghost" data-s="reset" title="بازگشت به مقدار فایل سایت">بازنشانی</button>' : ""}</div>
+        </article>`).join("");
+      filterProducts();
+      $$("#products button").forEach(b => b.onclick = () => {
+        const tr = b.closest(".prod"), f = (k) => $(`[data-f=${k}]`, tr), id = tr.dataset.id;
+        const body = b.dataset.s === "reset" ? { id, reset: true } : { id, price: toNum(f("price").value), old: toNum(f("old").value), badge: f("badge").value, hidden: f("hidden").checked };
+        if (body.price === false || body.old === false) return say("قیمت را فقط با عدد وارد کنید.");
+        api("product", body).then(() => { say("ذخیره شد.", 1); loadProducts(); }).catch(fail);
+      });
+    } catch (e) { fail(e); }
+  }
+  const filterProducts = () => { const q = $("#p-search").value.trim(); $$("#products .prod").forEach(c => { c.hidden = !!q && !c.dataset.name.includes(q); }); };
+  $("#p-search").oninput = filterProducts;
+  const toNum = (s) => { s = String(s).replace(/[۰-۹]/g, d => "۰۱۲۳۴۵۶۷۸۹".indexOf(d)).replace(/[,٬\s]/g, ""); return s === "" ? null : /^\d+$/.test(s) ? Number(s) : false; };
+
+  if (KEY) enter();
+})();
+</script>
+</body>
+</html>
