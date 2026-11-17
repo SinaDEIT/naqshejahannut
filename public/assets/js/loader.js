@@ -3,7 +3,7 @@
   "use strict";
 
   // Public Railway API origin; set this after creating the Railway service.
-  window.NJK_API_BASE = window.NJK_API_BASE || "";
+  window.NJK_API_BASE = "https://naqshejahannut-production.up.railway.app";;
   window.njkApiUrl = function (path) {
     return new URL("/" + String(path).replace(/^\/+/, ""), window.NJK_API_BASE || location.origin).href;
   };
